@@ -108,7 +108,7 @@ html, body { height: 100%; }
 @keyframes launch {
   0% { transform: translateY(0) scale(1); opacity: 1; }
   80% { opacity: 1; }
-  100% { transform: translateY(-520px) scale(0.9); opacity: 0; }
+  100% { transform: translateY(-460px) scale(0.9); opacity: 0; }
 }
 
 #bg-svg .rocket.launching, #rockets .rocket.launching {

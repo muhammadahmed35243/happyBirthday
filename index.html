@@ -149,6 +149,10 @@
             <source src="aud.mp3" type="audio/mp3" />
             <embed height="100" width="100" src="aud.mp3" />
         </audio>
+        <!-- Fireworks sound (preload) -->
+        <audio id="fwAudio" preload="auto">
+            <source src="fireworks.mp3" type="audio/mpeg" />
+        </audio>
         <div id="wrap">
             <div id="text">
                 <div id="code">
@@ -325,11 +329,13 @@
                         var rect = r[0].getBoundingClientRect();
                         var cx = rect.left + rect.width/2;
                         var cy = rect.top + rect.height/2;
+                        console.log('rocket rect', rect, 'page coords', cx, cy);
 
                         // convert page coords to bg-svg coords
                         var pt = bgSvg.createSVGPoint();
                         pt.x = cx; pt.y = cy;
                         var svgP = pt.matrixTransform(bgSvg.getScreenCTM().inverse());
+                        console.log('svg coords', svgP.x, svgP.y);
 
                         var fw = $(fireworks[target % fireworks.length]);
                         // save original transform to restore later
@@ -338,6 +344,9 @@
                         // move firework to apex
                         fw.attr('transform', 'translate(' + svgP.x.toFixed(1) + ',' + svgP.y.toFixed(1) + ')');
                         fw.addClass('play');
+                        // play sound if available
+                        var a = document.getElementById('fwAudio');
+                        if (a) { try { a.currentTime = 0; a.play(); } catch(err) { console.log('fwAudio play error', err); } }
                         // restore after animation
                         setTimeout(function(){
                             fw.removeClass('play');
@@ -349,6 +358,8 @@
                         // fallback: just play the firework without repositioning
                         var fw = $(fireworks[target % fireworks.length]);
                         fw.addClass('play');
+                        var a = document.getElementById('fwAudio');
+                        if (a) { try { a.currentTime = 0; a.play(); } catch(err) { console.log('fwAudio play error', err); } }
                         setTimeout(function(){ fw.removeClass('play'); }, 1600);
                     }
                 });
