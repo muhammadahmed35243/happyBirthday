@@ -103,15 +103,9 @@ html, body { height: 100%; }
   animation: launch 1.6s cubic-bezier(.3,.1,.1,1) forwards;
 }
 
-/* Pause fireworks by default; play when ancestor .play present */
-#bg-svg .fw-ring, #bg-svg .fw-spark {
-  animation-play-state: paused;
-}
-
-#bg-svg .firework.play .fw-ring,
-#bg-svg .firework.play .fw-spark {
-  animation-play-state: running;
-}
+/* Hide fireworks by default; reveal when .play class is added */
+#bg-svg .firework { opacity: 0; transition: opacity 0.12s linear; }
+#bg-svg .firework.play { opacity: 1; }
 
 .balloon {
   position: absolute;
