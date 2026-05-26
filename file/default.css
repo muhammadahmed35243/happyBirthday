@@ -103,9 +103,8 @@ html, body { height: 100%; }
   animation: launch 1.6s cubic-bezier(.3,.1,.1,1) forwards;
 }
 
-/* Hide fireworks by default; reveal when .play class is added */
-#bg-svg .firework { opacity: 0; transition: opacity 0.12s linear; }
-#bg-svg .firework.play { opacity: 1; }
+/* Fireworks visible by default (show static/animated bursts); rockets still add .play for extra visibility) */
+#bg-svg .firework { opacity: 1; }
 
 .balloon {
   position: absolute;
