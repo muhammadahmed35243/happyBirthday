@@ -116,26 +116,7 @@
             <circle class="fw-spark" cx="0" cy="0" r="2.0" style="--dx:42px;--dy:-78px; animation-delay:1.5s; fill:#ffcc88" />
         </g>
     </svg>
-    <!-- Rockets (launch from bottom) -->
-    <svg id="rockets" viewBox="0 0 1100 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <g transform="translate(0,160)">
-            <g class="rocket" data-target="0" transform="translate(260,0)">
-                <rect x="-4" y="-18" width="8" height="18" rx="3" />
-                <polygon points="-6,-18 6,-18 0,-26" />
-                <path class="flame" d="M0,2 C-3,8 -2,14 0,18 C2,14 3,8 0,2 Z" transform="translate(0,18) scale(0.45)" />
-            </g>
-            <g class="rocket" data-target="1" transform="translate(640,0)">
-                <rect x="-4" y="-18" width="8" height="18" rx="3" />
-                <polygon points="-6,-18 6,-18 0,-26" />
-                <path class="flame" d="M0,2 C-3,8 -2,14 0,18 C2,14 3,8 0,2 Z" transform="translate(0,18) scale(0.45)" />
-            </g>
-            <g class="rocket" data-target="2" transform="translate(500,0)">
-                <rect x="-4" y="-18" width="8" height="18" rx="3" />
-                <polygon points="-6,-18 6,-18 0,-26" />
-                <path class="flame" d="M0,2 C-3,8 -2,14 0,18 C2,14 3,8 0,2 Z" transform="translate(0,18) scale(0.45)" />
-            </g>
-        </g>
-    </svg>
+    <!-- Rockets removed -->
     <div id="balloon-layer" aria-hidden="true">
         <span class="balloon b1"></span>
         <span class="balloon b2"></span>
@@ -149,10 +130,12 @@
             <source src="aud.mp3" type="audio/mp3" />
             <embed height="100" width="100" src="aud.mp3" />
         </audio>
-        <!-- Fireworks sound (preload) -->
-        <audio id="fwAudio" preload="auto">
-            <source src="fireworks_sound.mp3" type="audio/mpeg" />
+        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
+            <source src="fireworks_sound.mp3" type="audio/mp3" />
+            <embed height="100" width="100" src="fireworks_sound.mp3" />
         </audio>
+        <!-- Fireworks sound (preload) -->
+        
         <div id="wrap">
             <div id="text">
                 <div id="code">
@@ -305,68 +288,7 @@
         }));
 
         // Rocket launcher: periodically launch rockets and trigger fireworks
-        (function setupRockets(){
-            var rockets = $('#rockets').find('.rocket');
-            var fireworks = $('#bg-svg').find('.firework');
-            var bgSvg = document.getElementById('bg-svg');
-
-            function launchOne(i){
-                var r = $(rockets[i % rockets.length]);
-                r.removeClass('hidden');
-                r.removeClass('launching');
-                // restart animation reliably
-                setTimeout(function(){ r.addClass('launching'); }, 30);
-
-                var target = parseInt(r.attr('data-target')||0,10);
-
-                // listen for the end of the launch animation to trigger explosion
-                r.one('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function(){
-                    // hide rocket
-                    r.addClass('hidden');
-
-                    // compute rocket center in page coordinates
-                    try {
-                        var rect = r[0].getBoundingClientRect();
-                        var cx = rect.left + rect.width/2;
-                        var cy = rect.top + rect.height/2;
-                        console.log('rocket rect', rect, 'page coords', cx, cy);
-
-                        // convert page coords to bg-svg coords
-                        var pt = bgSvg.createSVGPoint();
-                        pt.x = cx; pt.y = cy;
-                        var svgP = pt.matrixTransform(bgSvg.getScreenCTM().inverse());
-                        console.log('svg coords', svgP.x, svgP.y);
-
-                        var fw = $(fireworks[target % fireworks.length]);
-                        // save original transform to restore later
-                        var orig = fw.attr('transform') || '';
-                        fw.attr('data-orig-transform', orig);
-                        // move firework to apex
-                        fw.attr('transform', 'translate(' + svgP.x.toFixed(1) + ',' + svgP.y.toFixed(1) + ')');
-                        fw.addClass('play');
-                        // play sound if available
-                        var a = document.getElementById('fwAudio');
-                        if (a) { try { a.currentTime = 0; a.play(); } catch(err) { console.log('fwAudio play error', err); } }
-                        // restore after animation
-                        setTimeout(function(){
-                            fw.removeClass('play');
-                            // restore original transform
-                            var o = fw.attr('data-orig-transform') || '';
-                            fw.attr('transform', o);
-                        }, 1600);
-                    } catch (e) {
-                        // fallback: just play the firework without repositioning
-                        var fw = $(fireworks[target % fireworks.length]);
-                        fw.addClass('play');
-                        var a = document.getElementById('fwAudio');
-                        if (a) { try { a.currentTime = 0; a.play(); } catch(err) { console.log('fwAudio play error', err); } }
-                        setTimeout(function(){ fw.removeClass('play'); }, 1600);
-                    }
-                });
-            }
-            var idx = 0;
-            setInterval(function(){ launchOne(idx++); }, 1600);
-        })();
+            // Rockets removed: fireworks remain visible and can be triggered manually
 
         runAsync().start();
     })();
