@@ -9,6 +9,100 @@ body {
   color: white;
   overflow: auto;
 }
+
+#balloon-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -140px;
+  width: 70px;
+  height: 92px;
+  border-radius: 50% 50% 48% 48%;
+  opacity: 0;
+  animation: floatUp 10s linear infinite;
+  will-change: transform, opacity;
+}
+
+.balloon::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  width: 2px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.75);
+  transform: translateX(-50%);
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  width: 16px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  transform: rotate(-25deg);
+}
+
+.b1 {
+  left: 8%;
+  background: linear-gradient(180deg, #ff7a7a, #ff3d57);
+  animation-delay: 0s;
+  animation-duration: 11s;
+}
+
+.b2 {
+  left: 24%;
+  background: linear-gradient(180deg, #ffd36b, #ffb347);
+  animation-delay: 2s;
+  animation-duration: 12s;
+}
+
+.b3 {
+  left: 48%;
+  background: linear-gradient(180deg, #7de1ff, #3aa7ff);
+  animation-delay: 4s;
+  animation-duration: 10.5s;
+}
+
+.b4 {
+  left: 68%;
+  background: linear-gradient(180deg, #b8ff8a, #4cd964);
+  animation-delay: 1s;
+  animation-duration: 11.5s;
+}
+
+.b5 {
+  left: 84%;
+  background: linear-gradient(180deg, #f3a7ff, #b06bff);
+  animation-delay: 3s;
+  animation-duration: 12.5s;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.9);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(14px, -52vh, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-10px, -112vh, 0) scale(1.05);
+    opacity: 0;
+  }
+}
 a {
   color: white;
   font-size: 14px;
