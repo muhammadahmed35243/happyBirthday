@@ -16,9 +16,20 @@
     <script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
     <script>
         function playAudio() {
-            var audio = document.getElementById("myAudio");
-            audio.play();
+            var musicAudio = document.getElementById("bgMusic");
+            var fireworksAudio = document.getElementById("fireworkAudio");
+
+            if (musicAudio) {
+                musicAudio.play().catch(function () {});
+            }
+
+            if (fireworksAudio) {
+                fireworksAudio.play().catch(function () {});
+            }
         }
+
+        document.addEventListener("pointerdown", playAudio, { once: true });
+        document.addEventListener("keydown", playAudio, { once: true });
     </script>
 </head>
 <body>
@@ -126,11 +137,11 @@
     </div>
     <div id="main">
         <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
-        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
+        <audio autoplay="autoplay" height="100" width="100" id="bgMusic">
             <source src="aud.mp3" type="audio/mp3" />
             <embed height="100" width="100" src="aud.mp3" />
         </audio>
-        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
+        <audio autoplay="autoplay" loop="loop" height="100" width="100" id="fireworkAudio">
             <source src="fireworks_sound.mp3" type="audio/mp3" />
             <embed height="100" width="100" src="fireworks_sound.mp3" />
         </audio>
