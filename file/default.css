@@ -115,8 +115,29 @@ html, body { height: 100%; }
   animation: launch 1.6s cubic-bezier(.3,.1,.1,1) forwards;
 }
 
-/* Fireworks visible by default (show static/animated bursts); rockets still add .play for extra visibility) */
-#bg-svg .firework { opacity: 1; }
+/* Fireworks are hidden until a rocket triggers them */
+#bg-svg .firework { opacity: 0; transition: opacity 0.12s ease-in-out; }
+
+#bg-svg .firework.play { opacity: 1; }
+
+/* Flame under the rocket while launching */
+#rockets .flame, #bg-svg .flame {
+  fill: orange;
+  filter: blur(1px) drop-shadow(0 0 6px rgba(255,140,40,0.8));
+  transform-origin: center top;
+  opacity: 0.95;
+}
+
+@keyframes flame-flicker {
+  0% { transform: scaleY(1) scaleX(1); opacity: 0.95 }
+  50% { transform: scaleY(1.25) scaleX(0.9); opacity: 0.8 }
+  100% { transform: scaleY(1) scaleX(1); opacity: 0.95 }
+}
+
+#rockets .rocket.launching .flame { animation: flame-flicker 160ms linear infinite; }
+
+/* Hide rocket explicitly when needed */
+.rocket.hidden { opacity: 0 !important; pointer-events: none; }
 
 .balloon {
   position: absolute;
