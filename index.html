@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HBD love</title>	    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link type="text/css" rel="stylesheet" href="./file/default.css">
     <script type="text/javascript" src="./file/jquery.min.js"></script>
     <script type="text/javascript" src="./file/jscex.min.js"></script>
@@ -32,7 +33,7 @@
         document.addEventListener("keydown", playAudio, { once: true });
     </script>
 </head>
-<body>
+<body class="!min-h-screen !overflow-x-hidden !bg-[radial-gradient(circle_at_20%_20%,_#2b0b5a_0%,_#1a0636_50%,_#0b0320_100%)] !text-white">
     <svg id="bg-svg" viewBox="0 0 1100 680" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <!-- Crescent -->
         <g transform="translate(760,80) scale(1.1)">
@@ -128,14 +129,19 @@
         </g>
     </svg>
     <!-- Rockets removed -->
-    <div id="balloon-layer" aria-hidden="true">
+    <div id="balloon-layer" class="!pointer-events-none !fixed !inset-0 !z-20 !overflow-hidden" aria-hidden="true">
         <span class="balloon b1"></span>
         <span class="balloon b2"></span>
         <span class="balloon b3"></span>
         <span class="balloon b4"></span>
         <span class="balloon b5"></span>
+        <span class="balloon b6"></span>
+        <span class="balloon b7"></span>
+        <span class="balloon b8"></span>
+        <span class="balloon b9"></span>
+        <span class="balloon b10"></span>
     </div>
-    <div id="main">
+    <div id="main" class="!relative !z-30 !min-h-screen !w-full">
         <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
         <audio autoplay="autoplay" height="100" width="100" id="bgMusic">
             <source src="aud.mp3" type="audio/mp3" />
@@ -147,10 +153,10 @@
         </audio>
         <!-- Fireworks sound (preload) -->
         
-        <div id="wrap">
-            <div id="text">
-                <div id="code">
-                    <span class="say">Dear <b><NAME>Habibi</NAME></b> 💞</span><br>
+        <div id="wrap" class="!relative !mx-auto !mt-0 !h-auto !w-full !max-w-[1100px]">
+            <div id="text" class="!absolute !left-[120px] !top-[80px] !h-[560px] !w-[380px] max-md:!left-[7vw] max-md:!top-[12vh] max-md:!h-auto max-md:!w-[min(80vw,320px)]">
+                <div id="code" class="!text-[30px] !font-extrabold !leading-[40px] !text-cyan-100 max-md:!text-[15px] max-md:!leading-[22px]">
+                    <span class="say">Dear <span class="habibi-burst">Habibi</span>💞</span><br>
                     <span class="say">Happy Birthday 🎈</span><br>
                     <span class="say">May Allah bless you 🍀</span><br>
                     <span class="say">And give u many happiness 💕</span><br>
@@ -159,10 +165,10 @@
                     <span class="say">Hope u have a great day today ❤️😘</span><br>
                 </div>
             </div>
-            <div id="clock-box">
+            <div id="clock-box" class="!absolute !left-[60px] !top-[550px] hidden !text-[28px] max-md:!left-[7vw] max-md:!top-[calc(12vh+170px)] max-md:!text-[18px]">
                 <span id="clock">577 days 0 hours 0 minutes 0 seconds</span> <!-- Change to "6940 days..." if needed -->
             </div>
-            <canvas id="canvas" width="1100" height="680"></canvas>
+            <canvas id="canvas" width="1100" height="680" class="!mx-auto !block !h-[680px] !w-[1100px] max-md:!h-auto max-md:!w-full"></canvas>
         </div>
     </div>
 

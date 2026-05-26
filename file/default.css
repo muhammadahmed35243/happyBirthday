@@ -193,20 +193,21 @@ a {
   margin-top: 10px;
 }
 #text {
-  width: 272px;
+  width: 560px;
   height: 560px;
-  left: 188px;
+  left: 120px;
   top: 80px;
   position: absolute;
 }
 #code {
   display: none;
   color: rgb(196, 255, 255);
-  font-size: 16px;
-  margin-top: 70px;
-  line-height: 25px;
-  font-size: larger;
-  font-weight: bolder;
+  width: 560px;
+  font-size: 30px;
+  margin-top: 60px;
+  line-height: 40px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 #clock-box {
   position: absolute;
@@ -242,6 +243,28 @@ a {
 .say {
   margin-left: 5px;
 }
+
+.habibi-burst {
+  display: inline-block;
+  font-size: 1.35em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #ffd36b;
+ 
+  transform: rotate(-8deg) scale(1.08);
+  animation: habibi-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes habibi-bounce {
+  0%, 100% {
+    transform: rotate(-8deg) scale(1.05) translateY(0);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg) scale(1.18) translateY(-4px);
+    filter: hue-rotate(25deg);
+  }
+}
 .space {
   margin-right: 150px;
 }
@@ -272,7 +295,7 @@ a {
   }
 
   #text {
-    width: min(80vw, 320px);
+    width: min(88vw, 360px);
     left: 7vw;
     top: 12vh;
     height: auto;
@@ -280,8 +303,9 @@ a {
   }
 
   #code {
-    font-size: 13px;
-    line-height: 20px;
+    width: min(88vw, 360px);
+    font-size: 15px;
+    line-height: 22px;
     margin-top: 0;
   }
 
@@ -311,4 +335,39 @@ a {
     width: 48px;
     height: 64px;
   }
+}
+
+.b6 {
+  left: 16%;
+  background: linear-gradient(180deg, #ff7b7b, #cc2d4a);
+  animation-delay: 5s;
+  animation-duration: 10.8s;
+}
+
+.b7 {
+  left: 34%;
+  background: linear-gradient(180deg, #ffd36b, #d38b22);
+  animation-delay: 1.4s;
+  animation-duration: 12.2s;
+}
+
+.b8 {
+  left: 57%;
+  background: linear-gradient(180deg, #73e0ff, #2d8cff);
+  animation-delay: 2.7s;
+  animation-duration: 11.2s;
+}
+
+.b9 {
+  left: 72%;
+  background: linear-gradient(180deg, #86df87, #2b9f57);
+  animation-delay: 4.6s;
+  animation-duration: 12.8s;
+}
+
+.b10 {
+  left: 92%;
+  background: linear-gradient(180deg, #ff88e1, #9f4bd6);
+  animation-delay: 0.8s;
+  animation-duration: 11.7s;
 }
