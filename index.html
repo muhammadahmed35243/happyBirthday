@@ -304,6 +304,8 @@
         (function setupRockets(){
             var rockets = $('#rockets').find('.rocket');
             var fireworks = $('#bg-svg').find('.firework');
+            var bgSvg = document.getElementById('bg-svg');
+
             function launchOne(i){
                 var r = $(rockets[i % rockets.length]);
                 r.removeClass('hidden');
@@ -317,10 +319,38 @@
                 r.one('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function(){
                     // hide rocket
                     r.addClass('hidden');
-                    // trigger corresponding firework at the rocket's apex position
-                    var fw = $(fireworks[target % fireworks.length]);
-                    fw.addClass('play');
-                    setTimeout(function(){ fw.removeClass('play'); }, 1600);
+
+                    // compute rocket center in page coordinates
+                    try {
+                        var rect = r[0].getBoundingClientRect();
+                        var cx = rect.left + rect.width/2;
+                        var cy = rect.top + rect.height/2;
+
+                        // convert page coords to bg-svg coords
+                        var pt = bgSvg.createSVGPoint();
+                        pt.x = cx; pt.y = cy;
+                        var svgP = pt.matrixTransform(bgSvg.getScreenCTM().inverse());
+
+                        var fw = $(fireworks[target % fireworks.length]);
+                        // save original transform to restore later
+                        var orig = fw.attr('transform') || '';
+                        fw.attr('data-orig-transform', orig);
+                        // move firework to apex
+                        fw.attr('transform', 'translate(' + svgP.x.toFixed(1) + ',' + svgP.y.toFixed(1) + ')');
+                        fw.addClass('play');
+                        // restore after animation
+                        setTimeout(function(){
+                            fw.removeClass('play');
+                            // restore original transform
+                            var o = fw.attr('data-orig-transform') || '';
+                            fw.attr('transform', o);
+                        }, 1600);
+                    } catch (e) {
+                        // fallback: just play the firework without repositioning
+                        var fw = $(fireworks[target % fireworks.length]);
+                        fw.addClass('play');
+                        setTimeout(function(){ fw.removeClass('play'); }, 1600);
+                    }
                 });
             }
             var idx = 0;
