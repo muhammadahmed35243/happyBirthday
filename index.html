@@ -2,6 +2,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HBD love</title>	    
     <link type="text/css" rel="stylesheet" href="./file/default.css">
     <script type="text/javascript" src="./file/jquery.min.js"></script>
@@ -63,7 +64,9 @@
         }
 
         var width = canvas.width();
-        var height = canvas.height();        
+        var aspect = 680/1100; /* original canvas aspect ratio */
+        var height = Math.round(width * aspect);
+        canvas.css("height", height + "px");
         canvas.attr("width", width);
         canvas.attr("height", height);
 
