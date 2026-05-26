@@ -219,7 +219,9 @@
 
     Tree = function(canvas, width, height, opt) {
         this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
+        // Hint to the browser that we'll read pixels frequently (getImageData)
+        // improves performance in some browsers by avoiding costly readback paths.
+        this.ctx = canvas.getContext('2d', { willReadFrequently: true });
         this.width = width;
         this.height = height;
         this.opt = opt || {};
