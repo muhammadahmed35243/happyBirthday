@@ -287,11 +287,21 @@ a {
     width: 100%;
     height: auto;
     min-height: 0;
-    margin-top: -1rem;
+    margin-top: 0;
   }
 
   #main {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  #wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   #text {
