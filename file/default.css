@@ -54,35 +54,35 @@ body {
 
 .b1 {
   left: 8%;
-  background: linear-gradient(180deg, #ff7a7a, #ff3d57);
+  background: linear-gradient(180deg, #d95a5a, #b81f3d);
   animation-delay: 0s;
   animation-duration: 11s;
 }
 
 .b2 {
   left: 24%;
-  background: linear-gradient(180deg, #ffd36b, #ffb347);
+  background: linear-gradient(180deg, #c99a3e, #b36f1f);
   animation-delay: 2s;
   animation-duration: 12s;
 }
 
 .b3 {
   left: 48%;
-  background: linear-gradient(180deg, #7de1ff, #3aa7ff);
+  background: linear-gradient(180deg, #4ea8c9, #1f75c8);
   animation-delay: 4s;
   animation-duration: 10.5s;
 }
 
 .b4 {
   left: 68%;
-  background: linear-gradient(180deg, #b8ff8a, #4cd964);
+  background: linear-gradient(180deg, #7dbd59, #2f9b49);
   animation-delay: 1s;
   animation-duration: 11.5s;
 }
 
 .b5 {
   left: 84%;
-  background: linear-gradient(180deg, #f3a7ff, #b06bff);
+  background: linear-gradient(180deg, #bc77cf, #8542c8);
   animation-delay: 3s;
   animation-duration: 12.5s;
 }
