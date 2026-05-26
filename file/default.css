@@ -82,6 +82,37 @@ html, body { height: 100%; }
   filter: drop-shadow(0 0 8px rgba(255,200,120,0.9));
 }
 
+/* Rocket styles */
+#bg-svg .rocket {
+  fill: #ff6b6b;
+  stroke: #fff3d6;
+  stroke-width: 0.6;
+  transform-origin: center center;
+  opacity: 0.95;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+@keyframes launch {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-520px) scale(0.9); opacity: 0; }
+}
+
+#bg-svg .rocket.launching {
+  animation: launch 1.6s cubic-bezier(.3,.1,.1,1) forwards;
+}
+
+/* Pause fireworks by default; play when ancestor .play present */
+#bg-svg .fw-ring, #bg-svg .fw-spark {
+  animation-play-state: paused;
+}
+
+#bg-svg .firework.play .fw-ring,
+#bg-svg .firework.play .fw-spark {
+  animation-play-state: running;
+}
+
 .balloon {
   position: absolute;
   bottom: -140px;
