@@ -4,15 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HBD love</title>	    
+    <link rel="icon" href="data:,">
     <script src="https://cdn.tailwindcss.com"></script>
     <link type="text/css" rel="stylesheet" href="./file/default.css">
     <script type="text/javascript" src="./file/jquery.min.js"></script>
-    <script type="text/javascript" src="./file/jscex.min.js"></script>
-    <script type="text/javascript" src="./file/jscex-parser.js"></script>
-    <script type="text/javascript" src="./file/jscex-jit.js"></script>
-    <script type="text/javascript" src="./file/jscex-builderbase.min.js"></script>
-    <script type="text/javascript" src="./file/jscex-async.min.js"></script>
-    <script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
     <script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
     <script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
     <script>
@@ -247,67 +242,74 @@
             canvas.toggleClass('hand', seed.hover(x, y));
         });
 
-        var seedAnimate = eval(Jscex.compile("async", function () {
+        function sleep(ms) {
+            return new Promise(function(resolve) {
+                setTimeout(resolve, ms);
+            });
+        }
+
+        async function seedAnimate() {
             seed.draw();
             while (hold) {
-                $await(Jscex.Async.sleep(10));
+                await sleep(10);
             }
             while (seed.canScale()) {
                 seed.scale(0.95);
-                $await(Jscex.Async.sleep(10));
+                await sleep(10);
             }
             while (seed.canMove()) {
                 seed.move(0, 2);
                 foot.draw();
-                $await(Jscex.Async.sleep(10));
+                await sleep(10);
             }
-        }));
+        }
 
-        var growAnimate = eval(Jscex.compile("async", function () {
+        async function growAnimate() {
             do {
                 tree.grow();
-                $await(Jscex.Async.sleep(10));
+                await sleep(10);
             } while (tree.canGrow());
-        }));
+        }
 
-        var flowAnimate = eval(Jscex.compile("async", function () {
+        async function flowAnimate() {
             do {
                 tree.flower(2);
-                $await(Jscex.Async.sleep(10));
+                await sleep(10);
             } while (tree.canFlower());
-        }));
+        }
 
-        var moveAnimate = eval(Jscex.compile("async", function () {
+        async function moveAnimate() {
             tree.snapshot("p1", 240, 0, 610, 680);
             while (tree.move("p1", 500, 0)) {
                 foot.draw();
-                $await(Jscex.Async.sleep(10));
+                await sleep(10);
             }
             foot.draw();
             tree.snapshot("p2", 500, 0, 610, 680);
 
             canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
             canvas.css("background", "#ffe");
-            $await(Jscex.Async.sleep(300));
+            await sleep(300);
             canvas.css("background", "none");
-        }));
+        }
 
-        var textAnimate = eval(Jscex.compile("async", function () {
+        function textAnimate() {
             $("#code").show().typewriter();
-        }));
+
+        }
 	    
-        var runAsync = eval(Jscex.compile("async", function () {
-            $await(seedAnimate());
-            $await(growAnimate());
-            $await(flowAnimate());
-            $await(moveAnimate());
-            textAnimate().start();
-        }));
+        async function runAsync() {
+            await seedAnimate();
+            await growAnimate();
+            await flowAnimate();
+            await moveAnimate();
+            textAnimate();
+        }
 
         // Rocket launcher: periodically launch rockets and trigger fireworks
             // Rockets removed: fireworks remain visible and can be triggered manually
 
-        runAsync().start();
+        runAsync();
     })();
     </script>
 </body>
